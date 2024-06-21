@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* background-color: #5d1d63; */
+}
+
+@font-face {
+  font-family: 'Helix';
+  src: url('/path-to-your-fonts/helix-font.ttf') format('truetype');
+}
+
+body {
+  /* font-family: 'Helix', sans-serif !important; */
+  /* color: white; */
+}
+
+.landing-container {
+    height: 100%;
+    width: 100%;
+}
