@@ -6,6 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Container, TextField } from '@mui/material';
+import axios from 'axios';
 
 const steps = ['Company or Team', 'Profile', 'Channel'];
 
@@ -24,7 +25,7 @@ const CreateWorkspaceComponent = () => {
         return skipped.has(step);
     };
 
-    const handleNext = () => {
+    const handleNext = (event) => {
         if (validateForm()) {
             let newSkipped = skipped;
             if (isStepSkipped(activeStep)) {
@@ -36,7 +37,30 @@ const CreateWorkspaceComponent = () => {
             setSkipped(newSkipped);
 
             if (activeStep === steps.length - 1) {
-                location.href = 'login'
+                event.preventDefault()
+
+                axios
+                    .post(
+                        `http://localhost:3500/api/v1/user/create-workspace`, 
+                        {
+                            companyName,
+                            firstName,
+                            firstChannel
+                        },
+                        {
+                            withCredentials: true
+                        }
+                    )
+                    .then((response) => {
+                        console.log(response.data)
+                        if(response.data.code === 201) {
+                            alert(`${response.data.message} !`)
+                            window.location.href = '/get-started'
+                        }
+                    })
+                    .catch((error) => {
+                        alert(`Status : ${error.response.data.message}`)
+                    })
             }
         }
     };

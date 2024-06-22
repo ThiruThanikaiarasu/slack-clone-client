@@ -1,45 +1,26 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
-import ChatIcon from '@mui/icons-material/Chat';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import { Box, Drawer, AppBar, Toolbar, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Home as HomeIcon, Chat as ChatIcon, Notifications as NotificationsIcon, MoreHorizOutlined as MoreHorizOutlinedIcon } from '@mui/icons-material';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import HomeComponent from '../HomeComponent/HomeComponent';
-import DMComponent from '../DMComponent/DMComponent';
-import ActivityComponent from '../ActivityComponent/ActivityComponent';
 
+const drawerWidth = 70
 
-const drawerWidth = 240
-
-export default function PermanentDrawerLeft() {
+const NavbarComponent = () => {
 
     const [activeIcon, setActiveIcon] = React.useState('/')
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            {/* <CssBaseline /> */}
-                <AppBar
-                    position="fixed"
-                    sx={{ width: `calc(100% - ${drawerWidth}px)`, height:'' }}
-                >
-                </AppBar>
+        <Box sx={{ display: 'flex', backgroundColor:'purple' }}>
+
             <Drawer
                 sx={{
-                width: '5%',
+                width: drawerWidth,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                    width: '5%',
+                    width: drawerWidth,
                     boxSizing: 'border-box',
+                    backgroundColor: 'purple',
+                    color: 'white'
                 },
                 }}
                 variant="permanent"
@@ -51,13 +32,17 @@ export default function PermanentDrawerLeft() {
                     <ListItem disablePadding >
                         <ListItemButton 
                             component={Link}
-                            to="/"
+                            to="/dashboard"
                             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',  }}
                         >
                             <ListItemIcon 
                                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '2em', width: '2em', backgroundColor: activeIcon === '/none' ? 'lightblue' : 'transparent', }}
                             >
-                                <HomeIcon />
+                                <HomeIcon 
+                                    sx={{
+                                        color: 'white'
+                                    }}
+                                />
                             </ListItemIcon>
                             <ListItemText primary="Home" sx={{ fontSize:'5px'}}/>
                         </ListItemButton>
@@ -71,7 +56,11 @@ export default function PermanentDrawerLeft() {
                             <ListItemIcon 
                                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '2em', backgroundColor: activeIcon === '/none' ? 'lightblue' : 'transparent', }}
                             >
-                                <ChatIcon />
+                                <ChatIcon 
+                                    sx={{
+                                        color: 'white'
+                                    }}
+                                />
                             </ListItemIcon>
                             <ListItemText primary="Chat" />
                         </ListItemButton>
@@ -85,7 +74,11 @@ export default function PermanentDrawerLeft() {
                             <ListItemIcon 
                                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '2em', width: '1em', backgroundColor: activeIcon === '/none' ? 'lightblue' : 'transparent', }}
                             >
-                                <NotificationsIcon/>
+                                <NotificationsIcon 
+                                    sx={{
+                                        color: 'white'
+                                    }}
+                                />
                             </ListItemIcon>
                             <ListItemText primary="Activity" />
                         </ListItemButton>
@@ -99,7 +92,11 @@ export default function PermanentDrawerLeft() {
                             <ListItemIcon 
                                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '2em', backgroundColor: activeIcon === '/none' ? 'lightblue' : 'transparent', }}
                             >
-                                <MoreHorizOutlinedIcon />
+                                <MoreHorizOutlinedIcon 
+                                    sx={{
+                                        color: 'white'
+                                    }}
+                                />
                             </ListItemIcon>
                             <ListItemText primary="More" />
                         </ListItemButton>
@@ -108,17 +105,8 @@ export default function PermanentDrawerLeft() {
                 </List>
                 
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
-                <Toolbar />
-                {/* <BrowserRouter> */}
-                <Routes>
-                    <Route path="/" element={<HomeComponent />} />
-                    <Route path="/dm" element={<DMComponent />} />
-                    <Route path="/activity" element={<ActivityComponent />} />
-                    <Route path="/more" element={<HomeComponent />} />
-                </Routes>
-                {/* </BrowserRouter> */}
-            </Box>
         </Box>
     );
 }
+
+export default NavbarComponent

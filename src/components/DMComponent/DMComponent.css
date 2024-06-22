@@ -1,6 +1,10 @@
 .dm-container {
-    height: 100%;
-    width: 100%;
-    background-color: #703577;
-    border-radius: .5em;
+    margin-left: 70px;
+    margin-top: 64px;
+}
+
+@media (max-width: 600px) {
+    .dm-container {
+        margin-top: 56px;
+    }
 }

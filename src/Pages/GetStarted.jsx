@@ -44,7 +44,7 @@ const GetStarted = () => {
             <Box
                 sx={{
                     display: 'flex',
-                    mt: '2em',
+                    marginTop: '2em',
                     backgroundColor: '#f9f6f1'
                 }}
             >

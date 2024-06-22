@@ -7,8 +7,27 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
 import logo from '../assets/slack_logo.png'
+import axios from 'axios';
 
 const Landing = () => {
+
+    React.useEffect( () => {
+        axios
+            .get(
+                `http://localhost:3500/api/v1/user/authenticate`, 
+                {
+                    withCredentials: true
+                }
+            )
+            .then((response) => {
+                if(response.status === 200) {
+                    window.location.href = '/dashboard'
+                }
+            })
+            .catch((error) => {
+                // alert(`Status : ${error.response.data.message}`)
+            })
+    }, [])
 
     const handleLogin = () => {
         location.href = '/login'

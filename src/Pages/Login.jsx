@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 import logo from '../assets/slack_logo.png'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -35,13 +36,37 @@ const Login = () => {
         setErrors({ email: emailError, password: passwordError })
 
         if (!emailError && !passwordError) {
-            // Proceed with form submission
-            console.log('Form submitted with:', { email, password })
+            event.preventDefault()
+            
+            axios
+                .post(
+                    `http://localhost:3500/api/v1/user/login`, 
+                    {
+                        email, password
+                    },
+                    {
+                        withCredentials: true
+                    }
+                )
+                .then((response) => {
+                    console.log(response.data)
+                    if(response.status === 200) {
+                        alert(`${response.data.message} !`)
+                        window.location.href = '/get-started'
+                    }
+                })
+                .catch((error) => {
+                    alert(`Status : ${error.response.data.message}`)
+                })
         }
     }
 
     return (
-        <Container>
+        <Container
+            sx={{
+                paddingTop: '3em'
+            }}
+        >
             <Toolbar disableGutters sx={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
                 <Box
                     component="img"
